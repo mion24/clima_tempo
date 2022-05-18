@@ -13,6 +13,20 @@ class Clima {
   final String? hora;
   final String? descricao;
   final List<ClimaNaSemana>? climaNaSemana;
+
+  factory Clima.fromJson(Map<String, dynamic> json) => Clima(
+        cidade: json['city'],
+        temperatura: json['temp'],
+        data: json['date'],
+        hora: json['time'],
+        descricao: json['description'],
+        climaNaSemana: json['forecast'] == null
+            ? []
+            : List<ClimaNaSemana>.from(
+                json['forecast'].map(
+                    (climaNaSemana) => ClimaNaSemana.fromJson(climaNaSemana)),
+              ),
+      );
 }
 
 class ClimaNaSemana {
@@ -29,4 +43,12 @@ class ClimaNaSemana {
   final int? maxima;
   final int? minima;
   final String? descricao;
+
+  factory ClimaNaSemana.fromJson(Map<String, dynamic> json) => ClimaNaSemana(
+        data: json['date'],
+        diaNaSemana: json['weekday'],
+        maxima: json['max'],
+        minima: json['min'],
+        descricao: json['description'],
+      );
 }
