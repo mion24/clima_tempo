@@ -9,16 +9,21 @@ class InformacaoClima extends StatelessWidget {
   final String? minima;
   final String? cidade;
 
-  const InformacaoClima(
-      {Key? key,
-      this.diaDaSemana,
-      this.data,
-      this.descricao,
-      this.temperatura,
-      this.maxima,
-      this.minima,
-      this.cidade})
-      : super(key: key);
+  final double? altura;
+  final double? largura;
+
+  const InformacaoClima({
+    Key? key,
+    this.diaDaSemana,
+    this.data,
+    this.descricao,
+    this.temperatura,
+    this.maxima,
+    this.minima,
+    this.cidade,
+    this.altura = 80,
+    this.largura = 80,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +31,11 @@ class InformacaoClima extends StatelessWidget {
       children: [
         Image.asset(
           'assets/imagens/ic_clima.png',
-          width: 80,
-          height: 80,
+          width: largura,
+          height: altura,
         ),
         Text('$diaDaSemana, $data'),
-        Text('$descricao, $temperatura°'),
+        Text('$descricao $temperatura'),
         Text('Máxima: $maxima, Mínima: $minima'),
         Text(cidade ?? ''),
       ],
